@@ -25,9 +25,30 @@ function createCatPage(catInfo) {
     let origin = $('<div><h2 class="text-2xl font-semibold text-gray-500">Origin</h2><p></p></div>').find('p').text(catInfo.origin).end();
     let coat = $('<div><h2 class="text-2xl font-semibold text-gray-500">Coat</h2><p></p></div>').find('p').text(catInfo.coat).end();
     let pattern = $('<div><h2 class="text-2xl font-semibold text-gray-500">Pattern</h2><p></p></div>').find('p').text(catInfo.pattern).end();
+    
+    let likes = 0;
+    let dislikes = 0;
 
-    catDescription.append(origin, coat, pattern);
+    if(localStorage.getItem('likedCats')) {
+        let likedCats = JSON.parse(localStorage.getItem('likedCats'));
+        likes = likedCats[id] || 0;
+    }
+
+    if(localStorage.getItem('dislikedCats')) {
+        let dislikedCats = JSON.parse(localStorage.getItem('dislikedCats'));
+        dislikes = dislikedCats[id] || 0;
+    }
+
+    let likeButton = $(`<button class="bg-green-500 text-white p-2 m-5 rounded">I like it! (<span id="likes-${id}">${likes}</span>)</button>`);
+    let dislikeButton = $(`<button class="text-red-400 border-red-400 p-2 m-5 rounded">I don\'t like it (<span id="dislikes-${id}">${dislikes}</span>)</button>`);
+
+    likeButton.on('click', function() { like(id);});
+    dislikeButton.on('click', function() { dislike(id);});
+
+    catDescription.append(origin, coat, pattern, likeButton, dislikeButton);
     catPage.append(catInfoHtml, catDescription);
+
+
 
     $('#cat-info').append(catPage);
 }

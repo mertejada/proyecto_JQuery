@@ -99,3 +99,55 @@ function redirectToCatPage(catBreed,catId) {
 
 }
 
+function like(catId) {
+
+    if (!localStorage.getItem('likedCats')) {
+        localStorage.setItem('likedCats', JSON.stringify({}));
+    }
+
+
+    let likedCats = JSON.parse(localStorage.getItem('likedCats'));
+
+    if (likedCats[catId]) {
+        likedCats[catId]++;
+    } else {
+        likedCats[catId] = 1;
+    }
+
+    localStorage.setItem('likedCats', JSON.stringify(likedCats));
+
+    updateLikesCount(catId, likedCats[catId]);
+}
+
+function updateLikesCount(catId, likesCount) {
+    let catLikes = document.getElementById(`likes-${catId}`);
+    if (catLikes) {
+        catLikes.innerHTML = likesCount;
+    }
+}
+
+//DAR DISLIKE A LOS GATOS
+function dislike(catId) {
+    if (!localStorage.getItem('dislikedCats')) {
+        localStorage.setItem('dislikedCats', JSON.stringify({}));
+    }
+
+    let dislikedCats = JSON.parse(localStorage.getItem('dislikedCats'));
+
+    if (dislikedCats[catId]) {
+        dislikedCats[catId]++;
+    } else {
+        dislikedCats[catId] = 1;
+    }
+
+    localStorage.setItem('dislikedCats', JSON.stringify(dislikedCats));
+
+    updateDislikesCount(catId, dislikedCats[catId]);
+}
+
+function updateDislikesCount(catId, dislikesCount) {
+    let catDislikes = document.getElementById(`dislikes-${catId}`);
+    if (catDislikes) {
+        catDislikes.innerHTML = dislikesCount;
+    }
+}
