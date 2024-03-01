@@ -1,12 +1,25 @@
 let imgBreedUrl =  "https://api.thecatapi.com/v1/images/search?breed_ids=";
 
+let close = document.getElementById('close-session');
+
+if(localStorage.getItem('currentUsername')){
+
+    close.addEventListener('click', () => {
+    localStorage.removeItem('currentUsername');
+    window.location.href = 'index.html';
+
+});}else{
+    close.style.display = 'none';
+
+    let logIn = document.getElementById('log-in');
+    logIn.style.display = 'block';
+}
 
 function getCats(url) {
     return $.getJSON(url); 
 }
 
 function getBreedImg(breed){
-    console.log(imgBreedUrl + breed);
     return $.getJSON(imgBreedUrl + breed);
 }
 
@@ -35,7 +48,7 @@ function getCatInfo(catBreed) {
 }
 
 
-function addFavoriteEventListeners(favoriteItem,catBreed) {
+function addFavoriteEventListeners(favoriteItem,catBreed ,catId) {
     let currentUser = localStorage.getItem('currentUsername');
     if(currentUser){
         let favorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
@@ -48,10 +61,12 @@ function addFavoriteEventListeners(favoriteItem,catBreed) {
             .then(function(catInfo) {
 
                 let cat= {
+                    id: catId,
                     breed: catInfo.breed,
                     origin: catInfo.origin,
                     coat: catInfo.coat,
                     pattern: catInfo.pattern
+                    
                 }
 
                 favorites.push(cat);
@@ -78,3 +93,11 @@ function addFavoriteEventListeners(favoriteItem,catBreed) {
     }
     
 }
+
+
+function redirectToCatPage(catBreed,catId) {
+    catBreed = catBreed.replace(' ', '%20');
+    window.location.href = `cat.html?breed=${catBreed}&id=${catId}`;
+
+}
+

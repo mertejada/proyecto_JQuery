@@ -1,24 +1,33 @@
 let catUrl = 'https://catfact.ninja/breeds';
 
-
-
-
 let catList = $('#cat-list');
 let catTable = $('#cat-table');
 
 let currentView = 'list';
 
 let currentPage = 0;
-let catsPerPage = 5;
+let catsPerPage = 20;
 
 let catBreedsUrl =  "https://api.thecatapi.com/v1/breeds" + `?limit=${catsPerPage}&page=${currentPage}`;
 
+let sortBy = 'asc';
+
+
+//un evento para cambiar el sortby
+
+$('#sort-by').on('change', function() {
+    sortBy = $(this).val();
+    currentPage = 1;
+    displayView(currentView);
+    console.log(sortBy);
+});
 
 
 
-function getCatsBreeds(url) {
+function getCatsBreeds(url, sortBy) {
     return $.getJSON(url);
 }
+
 
 function createListView(catsData) {
     catList.empty();
@@ -68,16 +77,10 @@ function createListView(catsData) {
 
         addToFavoritesButton.on('click', (event)=>{
             event.preventDefault();
-            addFavoriteEventListeners(addToFavoritesButton, cat.name);
+            addFavoriteEventListeners(addToFavoritesButton, cat.name, cat.id);
         });
         
     });
-
-
-    // Manejar clics en los enlaces "See more"
-    
-
-    // Ocultar la tabla y mostrar la lista
     catTable.hide();
     catList.show();
 }
@@ -110,8 +113,6 @@ function createTableView(catsData){
             <td><a href="#" id="see-${cat.name}" class="see-more-button bg-orange-500 text-white p-2 m-5 rounded">See more</a></td>
 
             `);
-
-
         tbody.append(catItem); 
 
         $('.see-more-button').on('click', function(event) {
@@ -158,7 +159,6 @@ displayView(currentView);
 
 function redirectToCatPage(catBreed,catId) {
     catBreed = catBreed.replace(' ', '%20');
-
     window.location.href = `cat.html?breed=${catBreed}&id=${catId}`;
 
 }
