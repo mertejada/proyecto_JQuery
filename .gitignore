@@ -1,12 +1,5 @@
-<<<<<<< HEAD
+node_modules
+produccion
+desarrollo
 .parcel-cache
-node_modules
-produccion
-desarrollo
-=======
-node_modules
-produccion
-desarrollo
-parcel-cache
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
 *tmp

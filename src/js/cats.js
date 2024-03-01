@@ -1,18 +1,11 @@
 let catUrl = 'https://catfact.ninja/breeds';
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
 let catList = $('#cat-list');
 let catTable = $('#cat-table');
 
 let currentView = 'list';
 
 let currentPage = 0;
-<<<<<<< HEAD
 let catsPerPage = 20;
 
 let catBreedsUrl =  "https://api.thecatapi.com/v1/breeds" + `?limit=${catsPerPage}&page=${currentPage}`;
@@ -36,19 +29,7 @@ function getCatsBreeds(url, sortBy) {
 }
 
 
-=======
-let catsPerPage = 5;
 
-let catBreedsUrl =  "https://api.thecatapi.com/v1/breeds" + `?limit=${catsPerPage}&page=${currentPage}`;
-
-
-
-
-function getCatsBreeds(url) {
-    return $.getJSON(url);
-}
-
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
 function createListView(catsData) {
     catList.empty();
     
@@ -97,23 +78,10 @@ function createListView(catsData) {
 
         addToFavoritesButton.on('click', (event)=>{
             event.preventDefault();
-<<<<<<< HEAD
             addFavoriteEventListeners(addToFavoritesButton, cat.name, cat.id);
         });
         
     });
-=======
-            addFavoriteEventListeners(addToFavoritesButton, cat.name);
-        });
-        
-    });
-
-
-    // Manejar clics en los enlaces "See more"
-    
-
-    // Ocultar la tabla y mostrar la lista
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
     catTable.hide();
     catList.show();
 }
@@ -146,11 +114,6 @@ function createTableView(catsData){
             <td><a href="#" id="see-${cat.name}" class="see-more-button bg-orange-500 text-white p-2 m-5 rounded">See more</a></td>
 
             `);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
         tbody.append(catItem); 
 
         $('.see-more-button').on('click', function(event) {
@@ -197,10 +160,6 @@ displayView(currentView);
 
 function redirectToCatPage(catBreed,catId) {
     catBreed = catBreed.replace(' ', '%20');
-<<<<<<< HEAD
-=======
-
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
     window.location.href = `cat.html?breed=${catBreed}&id=${catId}`;
 
 }

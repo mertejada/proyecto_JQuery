@@ -1,6 +1,5 @@
 let imgBreedUrl =  "https://api.thecatapi.com/v1/images/search?breed_ids=";
 
-<<<<<<< HEAD
 let close = document.getElementById('close-session');
 
 if(localStorage.getItem('currentUsername')){
@@ -15,18 +14,12 @@ if(localStorage.getItem('currentUsername')){
     let logIn = document.getElementById('log-in');
     logIn.style.display = 'block';
 }
-=======
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
 
 function getCats(url) {
     return $.getJSON(url); 
 }
 
 function getBreedImg(breed){
-<<<<<<< HEAD
-=======
-    console.log(imgBreedUrl + breed);
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
     return $.getJSON(imgBreedUrl + breed);
 }
 
@@ -54,12 +47,7 @@ function getCatInfo(catBreed) {
     });
 }
 
-
-<<<<<<< HEAD
 function addFavoriteEventListeners(favoriteItem,catBreed ,catId) {
-=======
-function addFavoriteEventListeners(favoriteItem,catBreed) {
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
     let currentUser = localStorage.getItem('currentUsername');
     if(currentUser){
         let favorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
@@ -72,18 +60,11 @@ function addFavoriteEventListeners(favoriteItem,catBreed) {
             .then(function(catInfo) {
 
                 let cat= {
-<<<<<<< HEAD
                     id: catId,
-=======
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
                     breed: catInfo.breed,
                     origin: catInfo.origin,
                     coat: catInfo.coat,
                     pattern: catInfo.pattern
-<<<<<<< HEAD
-                    
-=======
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
                 }
 
                 favorites.push(cat);
@@ -109,7 +90,6 @@ function addFavoriteEventListeners(favoriteItem,catBreed) {
         alert('You must be logged in to add favorites');
     }
     
-<<<<<<< HEAD
 }
 
 
@@ -119,6 +99,3 @@ function redirectToCatPage(catBreed,catId) {
 
 }
 
-=======
-}
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684

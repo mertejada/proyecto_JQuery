@@ -14,10 +14,8 @@ favorites.forEach(cat => {
         <td>${cat.coat}</td>
         <td>${cat.pattern}</td>
         <td><button class="remove-favorite bg-red-500 text-white p-2 m-5 rounded" data-id="${cat.id}">Remove</button></td>
-<<<<<<< HEAD
         <td><a href="#" id="see-${cat.breed}" class="see-more-button bg-orange-500 text-white p-2 m-5 rounded">See more</a></td>
-=======
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
+
     `;
     favTable.appendChild(row);
 
@@ -29,7 +27,6 @@ favorites.forEach(cat => {
         localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(favorites)); 
         row.remove();
     });
-<<<<<<< HEAD
 
     let seeMoreButton = row.querySelector('.see-more-button');
 
@@ -38,7 +35,4 @@ favorites.forEach(cat => {
         let breed = seeMoreButton.getAttribute('id').split('-')[1];
         redirectToCatPage(breed, cat.id);
     });
-
-=======
->>>>>>> 63bf8f836a3df101a9c854e6c971b1d247fd8684
 });
