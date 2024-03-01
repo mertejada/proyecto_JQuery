@@ -6,7 +6,7 @@
     <title>Document</title>
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="../styles/salida.css">
-
+    <script  src="../js/global.js" defer></script>
     <script  src="../js/cats.js" defer></script>
 </head>
 <body>
@@ -19,8 +19,8 @@
         </div>
         <div  class="flex justify-between items-center">
             
-            <!--<a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2" id="cart-link">Cart</a>
-            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a>
+            
+            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a><!--
             <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contact</a>-->
             <a href = "../index.html" class="text-gray-400 m-2" id="close-session">Log out</a>
             <a href = "../index.html" class="bg-green-600 text-white p-2 rounded-md m-2" id="log-in" style="display: none;">Log in</a>
@@ -48,16 +48,15 @@
         </div>
         
 
-        <ul id="cat-list" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10">
+        <ul id="cat-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-10 h-fit">
         </ul>
 
         <table id="cat-table" style="display: none;" class="w-full m-10">
             <thead class="bg-slate-100 border border-gray-300">
                 <tr>
+                    <th>Image</th>
                     <th>Breed</th>
-                    <th>Origin</th>
-                    <th>Coat</th>
-                    <th>Pattern</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
