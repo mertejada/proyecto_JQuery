@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../styles/salida.css">
+
+    <script  src="../js/global.js" defer></script>
+    <script  src="../js/cat.js" defer></script>
+</head>
+<body>
+    <header class=" p-4 flex justify-between shadow-md">
+        <div class="flex items-center">
+            <i data-feather="circle"></i>
+
+            <a href="cats.html" class="bg-blue-600 text-white p-2 rounded-md m-2">All cats</a>
+            <span id="category-links"></span> 
+        </div>
+        <div  class="flex justify-between items-center">
+            
+            <!--<a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2" id="cart-link">Cart</a>
+            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a>
+            <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contact</a>-->
+            <a href = "../index.html" class="text-gray-400 m-2" id="close-session">Log out</a>
+            <a href = "../index.html" class="bg-green-600 text-white p-2 rounded-md m-2" id="log-in" style="display: none;">Log in</a>
+        </div>
+        
+
+    </header>
+    <section id="cat-info" class="flex flex-col items-center justify-center p-10">   
+        <div id="cat-img" class="w-1/2 m-10 flex items-center justify-center">
+        </div>
+    </section>
+    
+</body>
+</html>

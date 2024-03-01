@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../styles/salida.css">
+
+    <script  src="../js/cats.js" defer></script>
+</head>
+<body>
+    <header class=" p-4 flex justify-between shadow-md">
+        <div class="flex items-center">
+            <i data-feather="circle"></i>
+
+            <a href="cats.html" class="bg-blue-600 text-white p-2 rounded-md m-2">All cats</a>
+            <span id="category-links"></span> 
+        </div>
+        <div  class="flex justify-between items-center">
+            
+            <!--<a href = "cart.html" class=" bg-slate-400 text-white p-2 rounded-md m-2" id="cart-link">Cart</a>
+            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a>
+            <a href = "contact.html" class="bg-slate-400 text-white p-2 rounded-md m-2">Contact</a>-->
+            <a href = "../index.html" class="text-gray-400 m-2" id="close-session">Log out</a>
+            <a href = "../index.html" class="bg-green-600 text-white p-2 rounded-md m-2" id="log-in" style="display: none;">Log in</a>
+        </div>
+        
+
+    </header>
+
+    <h1 class="m-10 text-3xl font-semibold mb-6 text-center">Welcome!</h1>
+    <h2 class=" text-2xl font-semibold mb-6 text-center text-gray-300">Take a look at our products</h2>
+    <section id="cats">
+        <div id="choose-view" class="p-5 text-gray-500"> <p>Choose view:
+            <button id="list" class=" bg-slate-100  text-gray-500 p-1 rounded-md border">List</button>
+            <button id="table" class=" bg-slate-100 text-gray-500 p-1 rounded-md border">Table</button>
+        </p>
+        </div>
+
+        <div id="sortby-category" class="p-5 text-gray-500">
+            <p>Sort by:
+                <select id="category" class=" bg-slate-100 text-gray-500 p-1 rounded-md border">
+                    <option value="asc" class="">Ascendent</option>
+                    <option value="desc">Descendent</option>
+                </select>
+            </p>
+        </div>
+        
+
+        <ul id="cat-list" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10">
+        </ul>
+
+        <table id="cat-table" style="display: none;" class="w-full m-10">
+            <thead class="bg-slate-100 border border-gray-300">
+                <tr>
+                    <th>Breed</th>
+                    <th>Origin</th>
+                    <th>Coat</th>
+                    <th>Pattern</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <a href = "cat.html" style="display:none">Ir a la tienda</a>
+    </section>
+
+</body>
+</html>

@@ -34,3 +34,7 @@ input:disabled {
   background-color: #f4f4f4;
   color: #ccc;
 }
+
+img{
+  border-radius: 20px;
+}
