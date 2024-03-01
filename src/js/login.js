@@ -58,7 +58,7 @@ function login(username, password) {
         if (user.password === password) {
             alert('Login successful');
             localStorage.setItem('currentUsername', username);
-            window.location.assign(productosRuta);
+            window.location.assign("../html/cats.html");
         } else {
             alert('The password is incorrect. Please try again.');
         }
