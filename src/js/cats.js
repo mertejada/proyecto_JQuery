@@ -1,6 +1,3 @@
-
-
-
 let catList = $('#cat-list'); // Lista de gatos
 let catTable = $('#cat-table'); // Tabla de gatos
 

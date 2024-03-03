@@ -1,4 +1,4 @@
-let favTable = document.getElementById('favorites-table'); 
+let favTable = document.getElementById('favorites-table');
 
 let currentUser = localStorage.getItem('currentUsername'); //Obtengo el usuario actual
 let favorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || []; //Obtengo los favoritos del usuario actual si los hay, si no, un array vacio    
@@ -18,10 +18,10 @@ favorites.forEach(cat => {
     //Evento para eliminar de favoritos
     let removeButton = row.querySelector('.remove-favorite');
     removeButton.addEventListener('click', (event) => {
-        let productId = event.target.getAttribute('data-id'); 
-        let productIndex = favorites.findIndex(cat => cat.id === productId); 
-        favorites.splice(productIndex, 1); 
-        localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(favorites)); 
+        let productId = event.target.getAttribute('data-id');
+        let productIndex = favorites.findIndex(cat => cat.id === productId);
+        favorites.splice(productIndex, 1);
+        localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(favorites));
         row.remove();
     });
 

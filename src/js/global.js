@@ -9,7 +9,7 @@ let catUrl = 'https://catfact.ninja/breeds'; //URL para obtener las razas de gat
 
 //CERRAR SESION
 //---------------------------------------------------------
-let close = document.getElementById('close-session'); 
+let close = document.getElementById('close-session');
 
 if (localStorage.getItem('currentUsername')) {
 
@@ -41,9 +41,8 @@ function getCatsBreeds(url) {
 //OBTENER IMAGEN DE RAZA LA API DE THECATAPI
 //------------------------------------------
 function getBreedImg(breed) {
-    return $.getJSON(imgBreedUrl + breed);
+    return $.getJSON(imgBreedUrl + breed + '&limit=3'); // Ajusta la URL para obtener tres imágenes
 }
-
 
 //OBTENER INFORMACION DE RAZA DE GATOS DE LA API DE THECATAPI
 //-----------------------------------------------------------

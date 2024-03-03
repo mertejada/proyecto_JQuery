@@ -1,24 +1,23 @@
-$(()=>{
-
-    $('#login-register').click((event)=>{
+$(() => {
+    $('#login-register').click((event) => {
         event.preventDefault();
 
         switch (event.target.id) {
-            case 'login-button':
+            case 'login-button': //Si se pulsa el boton de ir a login
                 $('#login').css('display', 'block');
                 $('#register').css('display', 'none');
                 break;
-            case 'register-button':
+            case 'register-button': //Si se pulsa el boton de ir a registro
                 $('#login').css('display', 'none');
                 $('#register').css('display', 'block');
                 break;
-            case 'register-submit':
-                var username = $("#register [name='username']").val();
+            case 'register-submit': //Si se mandan los datos del registro
+                let username = $("#register [name='username']").val();  //Obtengo el nombre de usuario
 
                 if (localStorage.getItem(username)) {
-                    alert('Sorry! This username is already in use. Try a different username');
-                } else {
-                    var user = {
+                    alert('Sorry! This username is already in use. Try a different username'); //Si el usuario ya existe
+                } else { //Si el usuario no existe lo añado a localstorage
+                    let user = {
                         email: $("#register [name='email']").val(),
                         name: $("#register [name='name']").val(),
                         lastname: $("#register [name='lastname']").val(),
@@ -39,7 +38,7 @@ $(()=>{
 
                 break;
 
-            case 'login-submit':
+            case 'login-submit': //Si se mandan los datos del login
                 let usernameLogin = $("#login [name='username']").val();
                 let passwordLogin = $("#login [name='password']").val();
                 login(usernameLogin, passwordLogin);
@@ -52,6 +51,9 @@ $(()=>{
     });
 });
 
+
+//FUNCION PARA HACER LOGIN
+//-------------------------
 function login(username, password) {
     let user = JSON.parse(localStorage.getItem(username));
     if (user) {
@@ -69,6 +71,8 @@ function login(username, password) {
 
 
 
+//VALIDACION DE LOS CAMPOS DEL REGISTRO
+//--------------------------------------
 function disableNextInput(nextInput) {
     if (!$(nextInput).prop('disabled')) {
         $(nextInput).prop('disabled', true);
@@ -79,23 +83,23 @@ function validateNextField(inputName, nextInputName) {
     var input = $("#register [name='" + inputName + "']");
     var nextInput = $("#register [name='" + nextInputName + "']");
 
-        if (input[0].validity.typeMismatch) { // Si el tipo de dato no es el correcto
-            input[0].setCustomValidity(inputName + ' not valid');
-            input[0].reportValidity();
-            disableNextInput(nextInput); 
-        } else if (input[0].validity.patternMismatch) { // Si no cumple el patrón
-            input[0].setCustomValidity(inputName + ' not valid');
-            input[0].reportValidity();
-            disableNextInput(nextInput);
-        } else if (input[0].validity.rangeUnderflow) { // Si el valor es menor que el mínimo (edad)
-            input[0].setCustomValidity(inputName + ' not valid');
-            input[0].reportValidity();
-            disableNextInput(nextInput);
-        } else if (input[0].validity.valueMissing) { // Si el campo está vacío
-            input[0].setCustomValidity(inputName + ' is required');
-            input[0].reportValidity();
-            disableNextInput(nextInput);
-        }else {
+    if (input[0].validity.typeMismatch) { // Si el tipo de dato no es el correcto
+        input[0].setCustomValidity(inputName + ' not valid');
+        input[0].reportValidity();
+        disableNextInput(nextInput);
+    } else if (input[0].validity.patternMismatch) { // Si no cumple el patrón
+        input[0].setCustomValidity(inputName + ' not valid');
+        input[0].reportValidity();
+        disableNextInput(nextInput);
+    } else if (input[0].validity.rangeUnderflow) { // Si el valor es menor que el mínimo (edad)
+        input[0].setCustomValidity(inputName + ' not valid');
+        input[0].reportValidity();
+        disableNextInput(nextInput);
+    } else if (input[0].validity.valueMissing) { // Si el campo está vacío
+        input[0].setCustomValidity(inputName + ' is required');
+        input[0].reportValidity();
+        disableNextInput(nextInput);
+    } else {
         input[0].setCustomValidity('');
         nextInput.prop('disabled', false);
     }

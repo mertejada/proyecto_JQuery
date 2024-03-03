@@ -18,6 +18,7 @@ catPage.prepend(titleElement);
 //--------------------------------------------------
 function createCatTable(catInfo) {
     catTable.empty();
+    catTable.addClass('w-1/2 mx-auto');
 
     for (let key in catInfo) {
         let catTableRow = $('<tr></tr>');
@@ -46,6 +47,8 @@ function appendBreedInfo(breedInfo) {
     for (let key in breedInfo) {
         if (keysToUse.includes(key)) {
             let catTableRow = $('<tr></tr>');
+
+            catTableRow.addClass('border-b-2 border-gray-300');
 
 
             let keyName = key.split('_').join(' ');
@@ -120,16 +123,19 @@ Promise.all([
     let imgData = results[1];
     let breedInfo = results[2].find(cat => cat.id === id);
 
-    createCatTable(catInfo); //usa la informacion de la API gratuita para crear la tabla (aunque este vacia si no hay coincidencias)
+    createCatTable(catInfo);
 
-    let img = imgData[0].url;
-    let imgElement = $('<img>').attr('src', img);
-    imgElement.addClass('h-96');
-    $('#cat-img').append(imgElement);
+    $('#cat-img').empty();
+    $('#cat-img').addClass('grid grid-cols-3 gap-4 justify-center');
 
-    appendBreedInfo(breedInfo); //añaade la informacion de la API de pago
+    for (let i = 0; i < Math.min(imgData.length, 6); i++) { //Si hay mas de 6 imagenes, solo muestro 6
+        let img = imgData[i].url;
+        let imgElement = $('<img>').attr('src', img);
+        $('#cat-img').append(imgElement);
+    }
 
-    addActions(id); //añado las acciones
+    appendBreedInfo(breedInfo);
+    addActions(id);
 }).catch(function (error) {
     console.error('Error:', error);
 });
