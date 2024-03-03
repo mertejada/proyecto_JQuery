@@ -10,4 +10,4 @@ https://github.com/mertejada/proyecto_JQuery
 
 ### Dudas del proyecto
 - No hay carrito. He supuesto que era un requisito del antiguo proyecto que se ha "colado" en este, ya que son gatos y no productos y, por tanto, no tienen precio.
-- La unión de las dos API's me parece confusa, ya que considero que con una bastaba para mostrar imágenes e información de los gatos. Depender de la API gratuita ha hecho que mi código se limite a mostrar menos información de la que podría (esto se explica mejor en los comentarios del propio codigo)
+- La unión de las dos API's me parece confusa, ya que considero que con una bastaba para mostrar imágenes e información de los gatos. Depender de la API gratuita ha hecho que mi código se limite a mostrar menos información de la que podría (esto se explica mejor en los comentarios del propio codigo). No sé si quizás no he entendido bien lo que se pretendía hacer al usar ambas.
