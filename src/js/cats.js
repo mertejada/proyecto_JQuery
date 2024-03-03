@@ -6,13 +6,11 @@
     let currentView = 'list';
 
     let currentPage = 0;
-    let catsPerPage = 10;
+    let catsPerPage = 7;
 
     catBreedsUrl =  "https://api.thecatapi.com/v1/breeds" + `?limit=${catsPerPage}&page=${currentPage}`;
 
     let sortBy = 'asc';
-
-
 
     $('#sort-by').on('change', function() {
         sortBy = $(this).val();
@@ -20,13 +18,9 @@
         displayView(currentView,sortBy);
     });
 
-
-
     function getCatsBreeds(url) {
         return $.getJSON(url);
     }
-
-
 
     function createListView(catsData) {
         catList.empty();
@@ -76,9 +70,6 @@
                 event.preventDefault();
                   addFavorite(cat.name, cat.id);
             });
-
-            
-            
             
         });
         catTable.hide();
