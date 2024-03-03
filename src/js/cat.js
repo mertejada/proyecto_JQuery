@@ -9,7 +9,7 @@ let catUrl = 'https://catfact.ninja/breeds';
 
 let catPage = $('#cat-info');
 let catTable = $('#cat-table');
-
+let actions = $('#actions');
 
 let titleElement = $('<h1 class="text-3xl font-bold text-center"></h1>').text(breed);
 catPage.prepend(titleElement);

@@ -6,7 +6,7 @@
     let currentView = 'list';
 
     let currentPage = 0;
-    let catsPerPage = 5;
+    let catsPerPage = 10;
 
     catBreedsUrl =  "https://api.thecatapi.com/v1/breeds" + `?limit=${catsPerPage}&page=${currentPage}`;
 
@@ -54,7 +54,7 @@
                 <div>
                     <h2 class="text-xl font-semibold">${cat.name}</h2>
                 </div>
-                <div id="actions">
+                <div>
                     <a href="#" id="see-${cat.name}-${cat.id}" class="see-more-button bg-orange-500 text-white p-2 m-5 rounded">See more</a>
                     <button id="add-to-favorites-${cat.id}" class="add-to-favorites bg-gray-400 text-white p-2 rounded cursor-pointer mt-3 mx-4">Add to favorites</button>
 
@@ -76,6 +76,8 @@
                 event.preventDefault();
                   addFavorite(cat.name, cat.id);
             });
+
+            
             
             
         });
