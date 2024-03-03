@@ -3,3 +3,4 @@ produccion
 desarrollo
 .parcel-cache
 *tmp
+.DS_Store
