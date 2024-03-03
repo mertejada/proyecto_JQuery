@@ -1,65 +1,91 @@
-let imgBreedUrl =  "https://api.thecatapi.com/v1/images/search?breed_ids=";
-let catBreedsUrl = "https://api.thecatapi.com/v1/breeds";
-let close = document.getElementById('close-session');
+//VARIABLES DE URL
+//-----------------
+let imgBreedUrl = "https://api.thecatapi.com/v1/images/search?breed_ids="; //URL para obtener la imagen de la raza de gato
+let catBreedsUrl = "https://api.thecatapi.com/v1/breeds"; //URL para obtener la informacion de la raza de gato
+let catUrl = 'https://catfact.ninja/breeds'; //URL para obtener las razas de gatos de la API gratuita 
 
-if(localStorage.getItem('currentUsername')){
+
+
+
+//CERRAR SESION
+//---------------------------------------------------------
+let close = document.getElementById('close-session'); 
+
+if (localStorage.getItem('currentUsername')) {
 
     close.addEventListener('click', () => {
-    localStorage.removeItem('currentUsername');
-    window.location.href = 'index.html';
+        localStorage.removeItem('currentUsername');
+        window.location.href = 'index.html';
 
-});}else{
+    });
+} else {
     close.style.display = 'none';
 
     let logIn = document.getElementById('log-in');
     logIn.style.display = 'block';
 }
 
+//OBTENER RAZAS DE GATOS DE LA API GRATUITA
+//------------------------------------------
 function getCats(url) {
-    return $.getJSON(url); 
+    return $.getJSON(url);
 }
 
-function getBreedImg(breed){
+//OBTENER RAZAS DE GATOS DE LA API 
+//------------------------------------------
+function getCatsBreeds(url) {
+    return $.getJSON(url);
+}
+
+
+//OBTENER IMAGEN DE RAZA LA API DE THECATAPI
+//------------------------------------------
+function getBreedImg(breed) {
     return $.getJSON(imgBreedUrl + breed);
 }
 
-function getBreedInfo(breed){
+
+//OBTENER INFORMACION DE RAZA DE GATOS DE LA API DE THECATAPI
+//-----------------------------------------------------------
+function getBreedInfo(breed) {
     return $.getJSON(catBreedsUrl);
 }
 
+
+
+//BUSCAR SI EN LA API GRATUITA EXISTE LA RAZA DE GATO DE LA API DE THECATAPI
+//--------------------------------------------------------------------------
 function getCatInfo(catBreed) {
-    return new Promise(function(resolve, reject) {
-        getCats(catUrl)
-            .done(function(data) {
+    return new Promise(function (resolve, reject) {
+        getCats(catUrl) //Se obtienen las razas de gatos de la API gratuita
+            .done(function (data) {
                 let catsData = data.data;
-                let catInfo = catsData.find(cat => cat.breed === catBreed);
+                let catInfo = catsData.find(cat => cat.breed === catBreed); //Se busca la raza de gato en la API gratuita
 
                 if (catInfo) {
-                    resolve(catInfo); 
+                    resolve(catInfo);
                 } else {
                     console.error('No se encontraron coincidencias para la raza proporcionada');
-                    // No se rechaza la promesa, simplemente se resuelve con un objeto vacío
-                    resolve({});
-                    let message = 'No se pueden mostrar algunas características de la raza.';
-                    catInfo.append($('<td></td>').text(message));
+                    resolve({}); //Se resuelve la promesa con un objeto vacío para que el código no falle en la promesa mas adelante
                 }
-
-                
             })
-            .fail(function(jqXHR, textStatus, errorThrown) {
+            .fail(function (jqXHR, textStatus, errorThrown) {
                 reject(errorThrown);
             });
     });
 }
 
-function addFavorite(catBreed ,catId) {
+
+//FUNCION PARA AÑADIAR A FAVORITOS
+//--------------------------------
+function addFavorite(catBreed, catId) {
     let currentUser = localStorage.getItem('currentUsername');
-    if(currentUser){
+    if (currentUser) {
         let favorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
 
         let existingFavorite = favorites.find(cat => cat.breed === catBreed);
 
-        if (!existingFavorite){
+        if (!existingFavorite) {
 
             let cat = {
                 breed: catBreed,
@@ -70,20 +96,25 @@ function addFavorite(catBreed ,catId) {
             localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(favorites));
 
             alert('The cat has been added to your favorites');
-        
-        }else{
+
+        } else {
             alert('This cat is already in your favorites');
         }
-    }else{
+    } else {
         alert('You must be logged in to add favorites');
-    }   
+    }
 }
 
-function redirectToCatPage(catBreed,catId) {
+//FUNCION PARA REDIRECCIONAR A LA PAGINA DE GATO
+//----------------------------------------------
+function redirectToCatPage(catBreed, catId) {
     catBreed = catBreed.replace(' ', '%20');
     window.location.href = `cat.html?breed=${catBreed}&id=${catId}`;
 }
 
+//FUNCIONES PARA DAR LIKE Y DISLIKE A LOS GATOS
+//---------------------------------------------
+//DAR LIKE A LOS GATOS
 function like(catId) {
 
     if (!localStorage.getItem('likedCats')) {
