@@ -4,28 +4,72 @@ breed = breed.split('&')[0];
 
 let id = decodeURIComponent(window.location.href.split('=')[2]);
 
-console.log(breed);
-console.log(id);
 
 let catUrl = 'https://catfact.ninja/breeds';
 
 let catPage = $('#cat-info');
+let catTable = $('#cat-table');
+
+
+let titleElement = $('<h1 class="text-3xl font-bold text-center"></h1>').text(breed);
+catPage.prepend(titleElement);
 
 function getCats(url) {
     return $.getJSON(url);
 }
 
 
-function createCatPage(catInfo) {
-    let catPage = $('<div class="flex flex-col justify-center"></div>');
+function createCatTable(catInfo) {
+    catTable.empty();
 
-    let catInfoHtml = $('<h1 class="text-3xl font-bold text-center"></h1>').text(breed);
-    let catDescription = $('<div id="cat-description" class="flex flex-col justify-center p-6 m-6 border rounded-2xl"></div>');
+    for (let key in catInfo) {
+        let catTableRow = $('<tr></tr>');
 
-    let origin = $('<div><h2 class="text-2xl font-semibold text-gray-500">Origin</h2><p></p></div>').find('p').text(catInfo.origin).end();
-    let coat = $('<div><h2 class="text-2xl font-semibold text-gray-500">Coat</h2><p></p></div>').find('p').text(catInfo.coat).end();
-    let pattern = $('<div><h2 class="text-2xl font-semibold text-gray-500">Pattern</h2><p></p></div>').find('p').text(catInfo.pattern).end();
+        let keyName = key.charAt(0).toUpperCase() + key.slice(1);
+
+        catTableRow.append($('<th></th>').text(keyName)); // Encabezado a la izquierda
+        catTableRow.append($('<td></td>').text(catInfo[key])); // Información a la derecha
+        catTable.append(catTableRow);
+    }
+}
+
+function appendBreedInfo(breedInfo) {
+    let keysToUse = [
+        "temperament", "description", "life_span", "indoor", "dog_friendly",
+        "child_friendly", "energy_level", "shedding_level", "grooming",
+        "intelligence", "social_needs", "stranger_friendly" ,"wikipedia_url"
+    ];
+
+    for (let key in breedInfo) {
+        if(keysToUse.includes(key)){
+            let catTableRow = $('<tr></tr>');
+        
+
+            let keyName = key.split('_').join(' ');
+            keyName = keyName.charAt(0).toUpperCase() + keyName.slice(1);
+     
+            catTableRow.append($('<th></th>').text(keyName)); // Encabezado a la izquierda
     
+            if(breedInfo[key] === null){
+                catTableRow.append($('<td></td>').text('No data available'));
+            }else if(breedInfo[key] == true){
+                catTableRow.append($('<td></td>').text('Yes'));
+            }else if(breedInfo[key] == false){
+                catTableRow.append($('<td></td>').text('No'));
+            }else{
+                catTableRow.append($('<td></td>').text(breedInfo[key])); 
+            }
+    
+            catTable.append(catTableRow);
+        
+        }
+
+        
+    }
+}
+
+
+function addActions(id) {
     let likes = 0;
     let dislikes = 0;
 
@@ -41,37 +85,38 @@ function createCatPage(catInfo) {
 
     let likeButton = $(`<button class="bg-green-500 text-white p-2 m-5 rounded">I like it! (<span id="likes-${id}">${likes}</span>)</button>`);
     let dislikeButton = $(`<button class="text-red-400 border-red-400 p-2 m-5 rounded">I don\'t like it (<span id="dislikes-${id}">${dislikes}</span>)</button>`);
+    let favoriteButton = $(`<button class="bg-blue-500 text-white p-2 m-5 rounded">Add to favorites</button>`);
+
 
     likeButton.on('click', function() { like(id);});
     dislikeButton.on('click', function() { dislike(id);});
+    favoriteButton.on('click', function() { addFavorite(breed, id);});
 
-    catDescription.append(origin, coat, pattern, likeButton, dislikeButton);
-    catPage.append(catInfoHtml, catDescription);
-
-
-
-    $('#cat-info').append(catPage);
+    actions.prepend(likeButton, dislikeButton, favoriteButton);
 }
 
 
-getCatInfo(breed)
-    .then(function(catInfo) {
-        createCatPage(catInfo);
-    })
-    .catch(function(error) {
-        console.error('Error:', error);
-    });
 
-getBreedImg(id)
-    .done((data)=>{
-        let img = data[0].url;
-        let imgElement = $('<img>').attr('src', img);
-        imgElement.addClass('h-96');
+Promise.all([
+    getCatInfo(breed),
+    getBreedImg(id),
+    getBreedInfo(id)
+]).then(function(results) {
+    let catInfo = results[0];
+    let imgData = results[1];
+    let breedInfo = results[2].find(cat => cat.id === id);
 
-        $('#cat-img').append(imgElement);
-        console.log(id);
-    })
-    .fail(function(jqXHR, textStatus, errorThrown){
-        console.error('Error en la petición:', textStatus, errorThrown);
-    });
+    createCatTable(catInfo);
+    
+    let img = imgData[0].url;
+    let imgElement = $('<img>').attr('src', img);
+    imgElement.addClass('h-96');
+    $('#cat-img').append(imgElement);
+
+    appendBreedInfo(breedInfo);
+    
+    addActions(id);
+}).catch(function(error) {
+    console.error('Error:', error);
+});
 

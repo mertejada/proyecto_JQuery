@@ -1,5 +1,5 @@
 let imgBreedUrl =  "https://api.thecatapi.com/v1/images/search?breed_ids=";
-
+let catBreedsUrl = "https://api.thecatapi.com/v1/breeds";
 let close = document.getElementById('close-session');
 
 if(localStorage.getItem('currentUsername')){
@@ -23,6 +23,10 @@ function getBreedImg(breed){
     return $.getJSON(imgBreedUrl + breed);
 }
 
+function getBreedInfo(breed){
+    return $.getJSON(catBreedsUrl);
+}
+
 function getCatInfo(catBreed) {
     return new Promise(function(resolve, reject) {
         getCats(catUrl)
@@ -31,12 +35,13 @@ function getCatInfo(catBreed) {
                 let catInfo = catsData.find(cat => cat.breed === catBreed);
 
                 if (catInfo) {
-                    resolve(catInfo);
+                    resolve(catInfo); 
                 } else {
-                    reject('No se encontraron coincidencias para la raza proporcionada');
-
-                    let error = $('<h1 class=" font-bold text-center"></h1>').text('Lo sentimos. No encontramos datos sobre esta raza.');
-                    catPage.append(error);
+                    console.error('No se encontraron coincidencias para la raza proporcionada');
+                    // No se rechaza la promesa, simplemente se resuelve con un objeto vacío
+                    resolve({});
+                    let message = 'No se pueden mostrar algunas características de la raza.';
+                    catInfo.append($('<td></td>').text(message));
                 }
 
                 
@@ -47,7 +52,7 @@ function getCatInfo(catBreed) {
     });
 }
 
-function addFavoriteEventListeners(favoriteItem,catBreed ,catId) {
+function addFavorite(catBreed ,catId) {
     let currentUser = localStorage.getItem('currentUsername');
     if(currentUser){
         let favorites = JSON.parse(localStorage.getItem(`favorites-${currentUser}`)) || [];
@@ -56,47 +61,27 @@ function addFavoriteEventListeners(favoriteItem,catBreed ,catId) {
 
         if (!existingFavorite){
 
-            getCatInfo(catBreed)
-            .then(function(catInfo) {
+            let cat = {
+                breed: catBreed,
+                id: catId
+            };
 
-                let cat= {
-                    id: catId,
-                    breed: catInfo.breed,
-                    origin: catInfo.origin,
-                    coat: catInfo.coat,
-                    pattern: catInfo.pattern
-                }
+            favorites.push(cat);
+            localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(favorites));
 
-                favorites.push(cat);
-                localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(favorites));
-
-                alert('Added to favorites');
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-            });
-
-
-        favorites.push(cat);
-        localStorage.setItem(`favorites-${currentUser}`, JSON.stringify(favorites));
-        favoriteItem.text('Added to favorites');
-        favoriteItem.attr('disabled', true);
+            alert('The cat has been added to your favorites');
+        
         }else{
             alert('This cat is already in your favorites');
         }
-
-        
     }else{
         alert('You must be logged in to add favorites');
-    }
-    
+    }   
 }
-
 
 function redirectToCatPage(catBreed,catId) {
     catBreed = catBreed.replace(' ', '%20');
     window.location.href = `cat.html?breed=${catBreed}&id=${catId}`;
-
 }
 
 function like(catId) {
@@ -151,3 +136,4 @@ function updateDislikesCount(catId, dislikesCount) {
         catDislikes.innerHTML = dislikesCount;
     }
 }
+

@@ -10,9 +10,6 @@ favorites.forEach(cat => {
     row.innerHTML = `
         
         <td>${cat.breed}</td>
-        <td>${cat.origin}</td>
-        <td>${cat.coat}</td>
-        <td>${cat.pattern}</td>
         <td><button class="remove-favorite bg-red-500 text-white p-2 m-5 rounded" data-id="${cat.id}">Remove</button></td>
         <td><a href="#" id="see-${cat.breed}" class="see-more-button bg-orange-500 text-white p-2 m-5 rounded">See more</a></td>
 

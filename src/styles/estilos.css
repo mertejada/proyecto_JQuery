@@ -40,3 +40,24 @@ img{
   height: 150px;
   width: fit-content;
 }
+
+#cat-table {
+  border-collapse: collapse;
+  border-radius: 20px;
+}
+
+#cat-table th,
+#cat-table td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+#cat-table th {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  #cat-table th {
+      width: 200px; /* Ancho del encabezado en dispositivos de escritorio */
+  }
+}
