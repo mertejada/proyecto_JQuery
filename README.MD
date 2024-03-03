@@ -3,7 +3,7 @@
 https://github.com/mertejada/proyecto_JQuery
 
 ## Enlace al hosting
-
+https://tejadapmercedes-proyecto-jquery.000webhostapp.com/
 
 ### Limitaciones del proyecto
 - Cuando el usuario ordena en ascendente o descendente, no muestra los datos desde el último dato hasta el primero, si no que ordena en descendente conforme van cargándose. La API no tiene ninguna forma gratuita en la que ordenar los datos de manera descendente y es por eso que lo tengo que hacer manualmente. Podría haber metido todos los datos en un array para evitarlo pero creo que es poco eficiente.
