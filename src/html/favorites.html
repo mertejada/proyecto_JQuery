@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="../styles/salida.css">
-    <script  src="../js/global.js" defer></script>
+    <script src="../js/global.js" defer></script>
 
-    <script  src="../js/favorites.js" defer></script>
+    <script src="../js/favorites.js" defer></script>
 </head>
+
 <body>
     <header class=" p-4 flex justify-between shadow-md">
         <div class="flex items-center">
             <i data-feather="circle"></i>
 
             <a href="cats.html" class="bg-blue-600 text-white p-2 rounded-md m-2">All cats</a>
-            <span id="category-links"></span> 
+            <span id="category-links"></span>
         </div>
-        <div  class="flex justify-between items-center">
-            <a href = "favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a>
-            <a href = "../index.html" class="text-gray-400 m-2" id="close-session">Log out</a>
-            <a href = "../index.html" class="bg-green-600 text-white p-2 rounded-md m-2" id="log-in" style="display: none;">Log in</a>
+        <div class="flex justify-between items-center">
+            <a href="favorites.html" class=" bg-slate-400 text-white p-2 rounded-md m-2">Favorites</a>
+            <a href="../index.html" class="text-gray-400 m-2" id="close-session">Log out</a>
+            <a href="../index.html" class="bg-green-600 text-white p-2 rounded-md m-2" id="log-in"
+                style="display: none;">Log in</a>
         </div>
     </header>
 
-    
+
     <section id="favorites" class="p-10">
         <h1 class="text-2xl font-bold mb-5">Favoritos</h1>
-        <table id="favorites-table" class="w-full text-left"> 
+        <table id="favorites-table" class="w-full text-left">
             <thead class="bg-gray-200">
                 <tr class="p-2">
-                    <th >Breed</th>
+                    <th>Breed</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -43,4 +46,5 @@
     </section>
 
 </body>
+
 </html>
